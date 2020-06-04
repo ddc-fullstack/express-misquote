@@ -1,10 +1,9 @@
-
 import express, {Application, Errback, ErrorRequestHandler, NextFunction, Request, Response} from 'express';
-
 import morgan from 'morgan';
 
 // Routes
 import {indexRoutes} from './routes/index.route';
+import {MisquoteRoute} from "./routes/misquote.route";
 
 
 // The following class creates the app and instantiates the server
@@ -35,12 +34,13 @@ export class App {
 
     // private method for setting up routes in their basic sense (ie. any route that performs an action on profiles starts with /profiles)
     private routes () {
-        this.app.use(indexRoutes);
+        this.app.use(indexRoutes)
+        this.app.use("/apis/misquote", MisquoteRoute)
     }
 
     // starts the server and tells the terminal to post a message that the server is running and on what port
     public async listen (): Promise<void> {
         await this.app.listen(this.app.get('port'));
-        console.log('Server on port', this.app.get('port'));
+        console.log("Express application built successfully");
     }
 }

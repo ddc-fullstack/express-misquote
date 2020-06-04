@@ -18,7 +18,7 @@ services:
     user: "node"
     volumes:
       - ./apis/src:/home/node/app/src
-      - ./apis/utils:home/node/app/utils/
+      - ./apis/utils:/home/node/app/utils/
       - ./apis/tsconfig.json:/home/node/app/tsconfig.json
 volumes:
   express-misquote:

@@ -7,3 +7,4 @@ CREATE TABLE misquote (
 	misquoteSubmitter VARCHAR(64) NOT NULL,
 	PRIMARY KEY(misquoteId)
 );
+
