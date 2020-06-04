@@ -1,6 +1,6 @@
 export interface Misquote {
-    misquoteId : string,
-    misquoteAttribution: string,
-    misquoteContent: string,
-    misquoteSubmitter: string
+  misquoteId: string | null,
+  misquoteAttribution: string,
+  misquoteContent: string,
+  misquoteSubmitter: string
 }

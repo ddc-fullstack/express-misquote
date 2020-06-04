@@ -1,7 +1,7 @@
 import {Misquote} from "../interfaces/misquote";
 import {connect} from "../../src/database";
 
-async function getMisquoteByMisquoteId(misquoteId : string) : Promise<Misquote | undefined>  {
+async function getMisquoteByMisquoteId(misquoteId : string) {
     try {
     const mysqlConnection = await connect();
 
@@ -15,5 +15,3 @@ async function getMisquoteByMisquoteId(misquoteId : string) : Promise<Misquote |
         return undefined
     }
 }
-
-getMisquoteByMisquoteId("uuid")

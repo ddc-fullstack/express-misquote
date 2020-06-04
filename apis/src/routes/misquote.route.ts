@@ -1,7 +1,8 @@
 import {Router} from "express";
-import {getAllMisquoteController} from "../controllers/misquote.contoller";
+import {getAllMisquoteController, insertMisquoteController} from "../controllers/misquote.contoller";
 
 export const MisquoteRoute = Router()
 
 MisquoteRoute.route("/")
-    .get(getAllMisquoteController)
+  .get(getAllMisquoteController)
+  .post(insertMisquoteController)
