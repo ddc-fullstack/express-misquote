@@ -1,10 +1,10 @@
 import {connect} from "../../src/database";
-import {Misquote} from "../interfaces/misquote";
+
 
 /**
  * Helper function that grabs all misquotes
  **/
-export async function getAllMisquotes() {
+export async function selectAllMisquotes() {
   try {
     
     const mysqlConnection = await connect()

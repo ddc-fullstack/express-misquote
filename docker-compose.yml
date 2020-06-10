@@ -11,6 +11,7 @@ services:
       - 3306:3306
   node:
     build: ./apis
+    container_name: "backend"
     env_file:
       - .env
     ports:
