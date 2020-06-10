@@ -19,11 +19,8 @@ export async function getAllMisquoteController(request: Request, response: Respo
 
 export async function getMisquoteByMisquoteIdController(request: Request, response: Response, nextFunction: NextFunction) {
 	try {
-
-		const {misquoteFoo} = request.params;
-
-		const data = await selectMisquoteByMisquoteId(misquoteFoo);
-		console.log(data)
+		const {misquoteId} = request.params;
+		const data = await selectMisquoteByMisquoteId(misquoteId);
 		const status: Status = {status: 200, data, message: null}
 		return response.json(status)
 	} catch (error) {

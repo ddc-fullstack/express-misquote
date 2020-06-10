@@ -16,6 +16,6 @@ MisquoteRoute.route("/:misquoteId")
 //.delete(deleteMisquote)
 
 
-MisquoteRoute.route("/misquoteFoo/:misquoteFoo")
+//MisquoteRoute.route("/misquoteFoo/:misquoteFoo")
 
 
