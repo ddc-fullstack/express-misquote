@@ -11,5 +11,4 @@ export async function insertMisquote(misquote: Misquote) {
   } catch (error) {
     console.log(error)
   }
-  
 }

@@ -3,8 +3,6 @@ import morgan from 'morgan'
 import csrf from "csurf"
 const cookieParser = require('cookie-parser')
 
-
-
 // Routes
 import { indexRoutes } from './routes/index.route'
 import { MisquoteRoute } from './routes/misquote.route'
@@ -32,8 +30,8 @@ export class App {
       
       this.app.use(morgan('dev'))
       this.app.use(express.json())
-      this.app.use(cookieParser())
-      this.app.use(csrf({cookie: {key:"XSRF-TOKEN", maxAge:3600}}))
+     // this.app.use(cookieParser())
+      //this.app.use(csrf({cookie: {key:"XSRF-TOKEN", maxAge:3600}}))
       // this.app.use(function (err : any, req: any, res: any, next: any) {
       //
       //   if (err.code !== 'EBADCSRFTOKEN') return next(err)
@@ -46,6 +44,7 @@ export class App {
 
     // private method for setting up routes in their basic sense (ie. any route that performs an action on profiles starts with /profiles)
     private routes () {
+      //TODO add "/apis"
       this.app.use(indexRoutes)
       this.app.use('/apis/misquote', MisquoteRoute)
     }

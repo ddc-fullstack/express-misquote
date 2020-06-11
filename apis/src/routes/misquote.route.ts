@@ -1,21 +1,23 @@
 import {Router} from "express";
 import {
-	getAllMisquoteController, getMisquoteByMisquoteIdController,
-	postMisquoteController
+	deleteMisquoteController,
+	getAllMisquoteController,
+	getMisquoteByMisquoteIdController,
+	getMisquoteByMisquoteSubmitterController,
+	postMisquoteController,
+	putMisquoteController
 } from "../controllers/misquote.contoller";
+import {deleteMisquote} from "../../utils/misquote/deleteMisquote";
 
 export const MisquoteRoute = Router()
 
 MisquoteRoute.route("/")
-  .get(getAllMisquoteController)
+	.get(getAllMisquoteController)
 	.post(postMisquoteController)
 
 MisquoteRoute.route("/:misquoteId")
 	.get(getMisquoteByMisquoteIdController)
-//.put(udpateMisquote)
-//.delete(deleteMisquote)
+	.put(putMisquoteController)
+	.delete(deleteMisquoteController)
 
-
-//MisquoteRoute.route("/misquoteFoo/:misquoteFoo")
-
-
+MisquoteRoute.route("/misquoteSubmitter/:misquoteSubmitter").get(getMisquoteByMisquoteSubmitterController)
