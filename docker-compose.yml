@@ -15,7 +15,7 @@ services:
     env_file:
       - .env
     ports:
-      - 8080:4200
+      - 8081:4200
     user: "node"
     volumes:
       - ./apis/src:/home/node/app/src
