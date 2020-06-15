@@ -7,6 +7,7 @@ import {selectMisquoteByMisquoteId} from "../../utils/misquote/selectMisquoteByM
 import {updateMisquote} from "../../utils/misquote/updateMisquote";
 import {deleteMisquote} from "../../utils/misquote/deleteMisquote";
 import {selectMisquoteByMisquoteSubmitter} from "../../utils/misquote/selectMisquoteByMisquoteSubmitter";
+import {validationResult} from "express-validator";
 
 
 export async function getAllMisquoteController(request: Request, response: Response, nextFunction: NextFunction) {
@@ -69,6 +70,8 @@ export async function deleteMisquoteController(request: Request, response: Respo
 export async function getMisquoteByMisquoteSubmitterController(request: Request, response: Response, nextFunction: NextFunction) {
 	try {
 		const {misquoteSubmitter} = request.params;
+		console.log("misquoteSubmitters type",typeof misquoteSubmitter)
+		console.log("misquoteSubmitter", misquoteSubmitter)
 		const data = await selectMisquoteByMisquoteSubmitter(misquoteSubmitter);
 		const status: Status = {status: 200, data, message: null}
 		return response.json(status)

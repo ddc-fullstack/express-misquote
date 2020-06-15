@@ -4,7 +4,7 @@ export async function selectMisquoteByMisquoteSubmitter(misquoteSubmitter: strin
 	try {
 		const mysqlConnection = await connect();
 		
-		const mySqlQuery = "SELECT BIN_TO_UUID(misquoteId) as misquoteId, misquoteAttribution, misquoteContent, misquoteSubmitter FROM misquote WHERE misquoteSubmitter LIKE %:misquoteSubmitter%"
+		const mySqlQuery = "SELECT BIN_TO_UUID(misquoteId) as misquoteId, misquoteAttribution, misquoteContent, misquoteSubmitter FROM misquote WHERE misquoteSubmitter LIKE :misquoteSubmitter%"
 		
 		const [rows] = await mysqlConnection.execute(mySqlQuery, {misquoteSubmitter})
 		
