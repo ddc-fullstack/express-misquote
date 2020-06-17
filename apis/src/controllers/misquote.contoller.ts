@@ -36,7 +36,7 @@ export async function getMisquoteByMisquoteIdController(request: Request, respon
 export async function postMisquoteController(request: Request, response: Response, nextFunction: NextFunction) {
 	try {
 		const  profile : Profile = request.session?.profile
-		const misquoteProfileId : string = profile.profileId as string
+		const misquoteProfileId : string = "01ed6c8a-af3f-11ea-904d-0242c0a88003"
 		const {misquoteAttribution, misquoteContent, misquoteSubmitter} = request.body
 		const misquote: Misquote = {misquoteId: null, misquoteProfileId, misquoteAttribution, misquoteContent, misquoteSubmitter}
 		const result = await insertMisquote(misquote)

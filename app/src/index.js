@@ -1,46 +1,47 @@
-import React from 'react'
+import React from 'react';
 import ReactDOM from 'react-dom'
-import 'bootstrap/dist/css/bootstrap.css'
-import { BrowserRouter } from 'react-router-dom'
-import { Route, Switch } from 'react-router'
+import 'bootstrap/dist/css/bootstrap.css';
+import { BrowserRouter } from "react-router-dom";
+import { Route, Switch } from "react-router";
 import { library } from '@fortawesome/fontawesome-svg-core'
-
-import { FourOhFour } from './pages/FourOhFour'
-import { Home } from './pages/Home'
-import { AboutUs } from './pages/AboutUs'
-import './index.css'
+import reducer from "./store"
+import { FourOhFour } from "./ui/FourOhFour";
+import { Home } from "./ui/Home";
+import { AboutUs } from "./ui/AboutUs";
+import "./index.css";
 import {
+  faDog,
   faEnvelope,
   faPencilAlt,
   faSignInAlt,
   faSortDown,
-  faUserCircle,
-  faDog
-} from '@fortawesome/free-solid-svg-icons'
-import { NavBar } from './shared/components/NavBar'
-import { faKey } from '@fortawesome/free-solid-svg-icons/faKey'
-import { Posts } from './pages/posts/Posts'
-import { applyMiddleware, createStore } from 'redux'
-import { combinedReducers } from './shared/reducers'
-import thunk from 'redux-thunk'
+  faUserCircle
+} from "@fortawesome/free-solid-svg-icons";
+import { NavBar } from "./ui/shared/components/NavBar";
+import { faKey } from "@fortawesome/free-solid-svg-icons/faKey";
+import { Posts } from "./ui/posts/Posts";
+import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 
-library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faSignInAlt, faKey, faDog)
+library.add(faPencilAlt, faUserCircle, faSortDown, faEnvelope, faSignInAlt, faKey, faDog);
 
-const store = createStore(combinedReducers, applyMiddleware(thunk))
+const store = configureStore({reducer})
+
 const Routing = (store) => (
   <>
     <Provider store={store}>
-      <BrowserRouter>
-        <NavBar/>
-        <Switch>
-          <Route exact path="/about-us" component={AboutUs}/>
-          <Route exact path="/posts" component={Posts}/>
-          <Route exact path="/" component={Home}/>
-          <Route component={FourOhFour}/>
-        </Switch>
-      </BrowserRouter>
+      <React.StrictMode>
+        <BrowserRouter>
+          <NavBar/>
+          <Switch>
+            <Route exact path="/about-us" component={AboutUs}/>
+            <Route exact path="/posts" component={Posts}/>
+            <Route exact path="/" component={Home}/>
+            <Route component={FourOhFour}/>
+          </Switch>
+        </BrowserRouter>
+      </React.StrictMode>
     </Provider>
   </>
-)
-ReactDOM.render(Routing(store), document.querySelector('#root'))
+);
+ReactDOM.render(Routing(store), document.querySelector('#root'));
