@@ -8,6 +8,7 @@ import {updateMisquote} from "../../utils/misquote/updateMisquote";
 import {deleteMisquote} from "../../utils/misquote/deleteMisquote";
 import {selectMisquoteByMisquoteSubmitter} from "../../utils/misquote/selectMisquoteByMisquoteSubmitter";
 import {validationResult} from "express-validator";
+import {Profile} from "../../utils/interfaces/Profile";
 
 
 export async function getAllMisquoteController(request: Request, response: Response, nextFunction: NextFunction) {
@@ -34,8 +35,10 @@ export async function getMisquoteByMisquoteIdController(request: Request, respon
 }
 export async function postMisquoteController(request: Request, response: Response, nextFunction: NextFunction) {
 	try {
+		const  profile : Profile = request.session?.profile
+		const misquoteProfileId : string = profile.profileId as string
 		const {misquoteAttribution, misquoteContent, misquoteSubmitter} = request.body
-		const misquote: Misquote = {misquoteId: null, misquoteAttribution, misquoteContent, misquoteSubmitter}
+		const misquote: Misquote = {misquoteId: null, misquoteProfileId, misquoteAttribution, misquoteContent, misquoteSubmitter}
 		const result = await insertMisquote(misquote)
 		return response.json({status: 200, data: null, message: result})
 	} catch (error) {
@@ -47,9 +50,10 @@ export async function putMisquoteController(request: Request, response: Response
 	try {
 		const {misquoteAttribution, misquoteContent, misquoteSubmitter} = request.body
 		const {misquoteId} = request.params;
-		const misquote: Misquote = {misquoteId, misquoteAttribution, misquoteContent, misquoteSubmitter}
-		const result = await updateMisquote(misquote)
-		return response.json({status: 200, data: null, message: result})
+	
+		// const newMisquote  : Misquote= {...originalMisquote, }
+		//const result = await updateMisquote(misquote)
+		//return response.json({status: 200, data: null, message: result})
 	} catch (error) {
 		console.log(error)
 	}

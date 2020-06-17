@@ -4,7 +4,7 @@ import {connect} from "../../src/database";
 export async function insertMisquote(misquote: Misquote) {
   try {
     const mySqlConnection = await connect()
-    const mySqlQuery = "INSERT INTO misquote(misquoteId, misquoteProfileId, misquoteAttribution, misquoteContent, misquoteSubmitter) VALUES(UUID_TO_BIN(UUID()), :misquoteProfileId, :misquoteAttribution, :misquoteContent, :misquoteSubmitter)";
+    const mySqlQuery = "INSERT INTO misquote(misquoteId, misquoteProfileId, misquoteAttribution, misquoteContent, misquoteSubmitter) VALUES(UUID_TO_BIN(UUID()), UUID_TO_BIN(:misquoteProfileId), :misquoteAttribution, :misquoteContent, :misquoteSubmitter)";
     
     const [rows] = await mySqlConnection.execute(mySqlQuery, misquote)
     return "Misquote created successfully"

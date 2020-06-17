@@ -10,6 +10,7 @@ import {
 import {asyncValidatorController} from "../controllers/asyncValidator.controller";
 import {misquoteIdValidator, misquoteValidator, putMisquoteIdValidator} from "../validators/misquote.validator";
 import {check} from "express-validator";
+import {isLoggedIn} from "../controllers/isloggedIn.controller";
 
 const {checkSchema} = require("express-validator");
 
@@ -17,12 +18,12 @@ export const MisquoteRoute = Router()
 
 MisquoteRoute.route("/")
 	.get(getAllMisquoteController)
-	.post(asyncValidatorController(checkSchema(misquoteValidator)), postMisquoteController)
+	.post(isLoggedIn,asyncValidatorController(checkSchema(misquoteValidator)), postMisquoteController)
 
 MisquoteRoute.route("/:misquoteId")
 	.get(asyncValidatorController(checkSchema(misquoteIdValidator)), getMisquoteByMisquoteIdController)
-	.put(asyncValidatorController(checkSchema(putMisquoteIdValidator)), putMisquoteController)
-	.delete(asyncValidatorController(checkSchema(misquoteIdValidator)), deleteMisquoteController)
+	.put(isLoggedIn, asyncValidatorController(checkSchema(putMisquoteIdValidator)), putMisquoteController)
+	.delete(isLoggedIn, asyncValidatorController(checkSchema(misquoteIdValidator)), deleteMisquoteController)
 
 MisquoteRoute.route("/misquoteSubmitter/:misquoteSubmitter")
 	.get(

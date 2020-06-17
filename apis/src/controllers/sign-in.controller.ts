@@ -28,7 +28,6 @@ export async function signInController(request: Request, response: Response, nex
 					status: 400,
 					data: null,
 					message
-					
 				});
 				
 				const signInSuccessful = () => {
