@@ -3,7 +3,10 @@ import morgan from 'morgan'
 // Routes
 import {indexRoutes} from './routes/index.route'
 import {MisquoteRoute} from './routes/misquote.route'
-import {signupRouter} from "./routes/sign-up.route";
+import {SignupRouter} from "./routes/sign-up.route";
+import {SignInRouter} from "./routes/sign-in.route";
+import passport from "passport";
+import {passportMiddleware} from "./controllers/sign-in.controller";
 
 const cookieParser = require('cookie-parser')
 const session = require("express-session")
@@ -16,6 +19,7 @@ export class App {
 	constructor(
 		private port?: number | string
 	) {
+		passportMiddleware; //es-lint-disable-line
 		this.app = express();
 		this.settings();
 		this.middlewares();
@@ -44,6 +48,8 @@ export class App {
 			maxAge: "3h"
 		}
 		this.app.use(session(sessionConfig))
+		this.app.use(passport.initialize());
+		this.app.use(passport.session());
 		// this.app.use(cookieParser())
 		// this.app.use(csrf({cookie: {key:"XSRF-TOKEN", maxAge:3600}}))
 		// this.app.use(function (err : any, req: any, res: any, next: any) {
@@ -59,9 +65,10 @@ export class App {
 	// private method for setting up routes in their basic sense (ie. any route that performs an action on profiles starts with /profiles)
 	private routes() {
 		//TODO add "/apis"
-		this.app.use(indexRoutes)
+		this.app.use('/apis', indexRoutes)
 		this.app.use('/apis/misquote', MisquoteRoute)
-		this.app.use('/apis/sign-up', signupRouter)
+		this.app.use('/apis/sign-up', SignupRouter)
+		this.app.use('/apis/sign-in', SignInRouter)
 	}
 	
 	// starts the server and tells the terminal to post a message that the server is running and on what port

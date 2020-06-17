@@ -13,4 +13,3 @@ export async function insertMisquote(misquote: Misquote) {
   }
 }
 
-const misquote : Misquote= {}
