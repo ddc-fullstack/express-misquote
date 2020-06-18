@@ -17,7 +17,7 @@ export const misquoteValidator = {
 	misquoteAttribution: {
 		isLength: {
 			errorMessage: "the name provided for the attribution of this misquote is to long",
-			options: {min:1,max:64}
+			options: {min:1, max:64}
 		},
 		trim: true,
 		escape: true

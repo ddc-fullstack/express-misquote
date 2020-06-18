@@ -3,15 +3,20 @@ import Card from "react-bootstrap/Card";
 import CardColumns from "react-bootstrap/CardColumns";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import FormControl from "react-bootstrap/FormControl";
-import Button from "react-bootstrap/Button";
 import Container from 'react-bootstrap/Container'
 import { useDispatch, useSelector } from 'react-redux'
+import * as Yup from "yup"
+
 import { fetchAllMisquotes } from '../../store/misquote'
 import { PostCard } from './PostCard'
+import { httpConfig } from '../../utils/http-config'
+import { Formik } from 'formik'
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
+import InputGroup from 'react-bootstrap/InputGroup'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Button from 'react-bootstrap/Button'
+import { PostForm } from './PostForm'
 
 export const Posts = () => {
   const dispatch = useDispatch()
@@ -24,7 +29,6 @@ export const Posts = () => {
   const sideEffects = () => {
     dispatch(fetchAllMisquotes())
   }
-
   React.useEffect(sideEffects, [])
   return (
     <>
@@ -39,36 +43,15 @@ export const Posts = () => {
 
           <Row>
 
-            <Card bg="shadow-light" className="border-0 rounded-6">
+            <Card bg="shadow-light" className="border-0 rounded-6 w-50">
               <Card.Body>
-                <Card.Text>
-                  <Form>
-                    <Form.Group>
-                      <InputGroup>
-                        <FormControl placeholder="Title Goes Here"/>
-                      </InputGroup>
-                    </Form.Group>
-
-                    <Form.Group>
-                      <InputGroup>
-                        <InputGroup.Prepend>
-                          <InputGroup.Text>
-                            <FontAwesomeIcon icon="dog"/>
-                          </InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <FormControl as="textarea" placeholder="Meow Meow Goes Here"/>
-                        <InputGroup.Append>
-                          <Button variant="primary" type="submit"> Submit <FontAwesomeIcon
-                            icon="envelope"/></Button>
-                        </InputGroup.Append>
-                      </InputGroup>
-                    </Form.Group>
-                  </Form>
-                </Card.Text>
+                <PostForm />
               </Card.Body>
             </Card>
             <CardColumns className="p-4">
-              {misquotes.map(misquote => <PostCard misquote={misquote} key={misquote.misquoteId} foo="bar" />)}
+              {
+                misquotes.map(misquote => <PostCard misquote={misquote} key={misquote.misquoteId} foo="bar"/>)
+              }
             </CardColumns>
           </Row>
 

@@ -18,7 +18,8 @@ export const MisquoteRoute = Router()
 
 MisquoteRoute.route("/")
 	.get(getAllMisquoteController)
-	.post(isLoggedIn,asyncValidatorController(checkSchema(misquoteValidator)), postMisquoteController)
+	//TODO add the isLoggedIn controller back to post after final misquote lecture
+	.post(asyncValidatorController(checkSchema(misquoteValidator)), postMisquoteController)
 
 MisquoteRoute.route("/:misquoteId")
 	.get(asyncValidatorController(checkSchema(misquoteIdValidator)), getMisquoteByMisquoteIdController)
