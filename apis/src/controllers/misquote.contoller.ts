@@ -4,82 +4,87 @@ import {Misquote} from "../../utils/interfaces/misquote";
 import {insertMisquote} from "../../utils/misquote/insertMisquote";
 import {selectAllMisquotes} from "../../utils/misquote/selectAllMisquotes";
 import {selectMisquoteByMisquoteId} from "../../utils/misquote/selectMisquoteByMisquoteId";
-import {updateMisquote} from "../../utils/misquote/updateMisquote";
 import {deleteMisquote} from "../../utils/misquote/deleteMisquote";
 import {selectMisquoteByMisquoteSubmitter} from "../../utils/misquote/selectMisquoteByMisquoteSubmitter";
-import {validationResult} from "express-validator";
 import {Profile} from "../../utils/interfaces/Profile";
 
 
 export async function getAllMisquoteController(request: Request, response: Response, nextFunction: NextFunction) {
-	try {
-		const data = await selectAllMisquotes()
-		console.log(data)
-		const status: Status = {status: 200, data, message: null}
-		return response.json(status)
-	} catch (error) {
-		console.log(error)
-	}
+  try {
+    const data = await selectAllMisquotes()
+    console.log(data)
+    const status: Status = {status: 200, data, message: null}
+    return response.json(status)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export async function getMisquoteByMisquoteIdController(request: Request, response: Response, nextFunction: NextFunction) {
-	try {
-		console.log(request.params)
-		const {misquoteId} = request.params;
-		const data = await selectMisquoteByMisquoteId(misquoteId);
-		const status: Status = {status: 200, data, message: null}
-		return response.json(status)
-	} catch (error) {
-		console.log(error)
-	}
+  try {
+    console.log(request.params)
+    const {misquoteId} = request.params;
+    const data = await selectMisquoteByMisquoteId(misquoteId);
+    const status: Status = {status: 200, data, message: null}
+    return response.json(status)
+  } catch (error) {
+    console.log(error)
+  }
 }
+
 export async function postMisquoteController(request: Request, response: Response, nextFunction: NextFunction) {
-	try {
-		const  profile : Profile = request.session?.profile
-		const misquoteProfileId : string = "01ed6c8a-af3f-11ea-904d-0242c0a88003"
-		const {misquoteAttribution, misquoteContent, misquoteSubmitter} = request.body
-		const misquote: Misquote = {misquoteId: null, misquoteProfileId, misquoteAttribution, misquoteContent, misquoteSubmitter}
-		const result = await insertMisquote(misquote)
-		return response.json({status: 200, data: null, message: result})
-	} catch (error) {
-		console.log(error)
-	}
+  try {
+    const profile: Profile = request.session?.profile
+    const misquoteProfileId =   <string> profile.profileId
+    const {misquoteAttribution, misquoteContent, misquoteSubmitter} = request.body
+    const misquote: Misquote = {
+      misquoteId: null,
+      misquoteProfileId,
+      misquoteAttribution,
+      misquoteContent,
+      misquoteSubmitter
+    }
+    const result = await insertMisquote(misquote)
+    return response.json({status: 200, data: null, message: result})
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export async function putMisquoteController(request: Request, response: Response, nextFunction: NextFunction) {
-	try {
-		const {misquoteAttribution, misquoteContent, misquoteSubmitter} = request.body
-		const {misquoteId} = request.params;
-	
-		// const newMisquote  : Misquote= {...originalMisquote, }
-		//const result = await updateMisquote(misquote)
-		//return response.json({status: 200, data: null, message: result})
-	} catch (error) {
-		console.log(error)
-	}
+  try {
+    const {misquoteAttribution, misquoteContent, misquoteSubmitter} = request.body
+    const {misquoteId} = request.params;
+    
+    // const newMisquote  : Misquote= {...originalMisquote, }
+    //const result = await updateMisquote(misquote)
+    //return response.json({status: 200, data: null, message: result})
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export async function deleteMisquoteController(request: Request, response: Response, nextFunction: NextFunction) {
-	try {
-		console.log(request.params)
-		const {misquoteId} = request.params;
-		const data = await deleteMisquote(misquoteId)
-		const status: Status = {status: 200, data, message: null}
-		return response.json(status)
-	} catch (error) {
-		console.log(error)
-	}
+  try {
+    console.log(request.params)
+    const {misquoteId} = request.params;
+    const data = await deleteMisquote(misquoteId)
+    const status: Status = {status: 200, data, message: null}
+    return response.json(status)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export async function getMisquoteByMisquoteSubmitterController(request: Request, response: Response, nextFunction: NextFunction) {
-	try {
-		const {misquoteSubmitter} = request.params;
-		console.log("misquoteSubmitters type",typeof misquoteSubmitter)
-		console.log("misquoteSubmitter", misquoteSubmitter)
-		const data = await selectMisquoteByMisquoteSubmitter(misquoteSubmitter);
-		const status: Status = {status: 200, data, message: null}
-		return response.json(status)
-	} catch (error) {
-		console.log(error)
-	}
+  try {
+    const {misquoteSubmitter} = request.params;
+    console.log("misquoteSubmitters type", typeof misquoteSubmitter)
+    console.log("misquoteSubmitter", misquoteSubmitter)
+    const data = await selectMisquoteByMisquoteSubmitter(misquoteSubmitter);
+    const status: Status = {status: 200, data, message: null}
+    return response.json(status)
+  } catch (error) {
+    console.log(error)
+  }
 }
