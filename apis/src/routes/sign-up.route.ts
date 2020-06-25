@@ -13,5 +13,5 @@ export const SignupRouter = Router();
 SignupRouter.route('/')
 	.post(asyncValidatorController(checkSchema(signupValidator)), signupProfileController);
 
-SignupRouter.route('/activation/:activation').get(asyncValidatorController([param("activation", "invalid activation link").isHexadecimal().notEmpty(F)]), activationController)
+SignupRouter.route('/activation/:activation').get(asyncValidatorController([param("activation", "invalid activation link").isHexadecimal().notEmpty()]), activationController)
 

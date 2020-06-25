@@ -7,13 +7,18 @@ services:
     env_file:
       - ./.env
     command: --default-authentication-plugin=mysql_native_password
+  app:
+    build: ./app
+    depends_on:
+      - node
+    ports:
+      - 80:80
   node:
     build: ./apis
-    container_name: "backend"
     env_file:
       - .env
     ports:
-      - 8081:4200
+      - 8080:4200
     user: "node"
     volumes:
       - ./apis/src:/home/node/app/src

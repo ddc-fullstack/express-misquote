@@ -114,14 +114,14 @@ export function PostForm () {
                       onBlur={handleBlur}
                       value={values.misquoteContent}
                     />
-                    {
-                      errors.misquoteContent && (
-                        <div className="alert alert-danger">
-                          {errors.misquoteContent}
-                        </div>
-                      )
-                    }
                   </InputGroup>
+                  {
+                    errors.misquoteContent && (
+                      <div className="alert alert-danger">
+                        {errors.misquoteContent}
+                      </div>
+                    )
+                  }
                 </Form.Group>
                 <Form.Group>
                   <InputGroup>
